@@ -3,7 +3,7 @@
     {
       "experiment_info": {
         "model_name": "SingleWeldDetector",
-        "date": "2026-05-19 08:19:17",
+        "date": "2026-05-11 08:19:17",
         "data_yaml": "/content/folds_1/fold10/data.yaml",
         "total_images": 143
       },
@@ -93,7 +93,7 @@
     {
       "experiment_info": {
         "model_name": "SingleWeldDetector",
-        "date": "2026-05-19 12:05:33",
+        "date": "2026-05-11 12:05:33",
         "data_yaml": "/content/mergfolds_1/data.yaml",
         "total_images": 134
       },
@@ -183,7 +183,7 @@
     {
       "experiment_info": {
         "model_name": "SingleWeldDetector",
-        "date": "2026-05-19 20:23:06",
+        "date": "2026-05-13 08:23:06",
         "data_yaml": "/content/mergfolds_1/data.yaml",
         "total_images": 134
       },

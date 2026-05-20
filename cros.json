@@ -1,0 +1,274 @@
+{
+  "experiments": [
+    {
+      "experiment_info": {
+        "model_name": "SingleWeldDetector",
+        "date": "2026-05-19 08:19:17",
+        "data_yaml": "/content/folds_1/fold10/data.yaml",
+        "total_images": 143
+      },
+      "test": {
+        "overall_metrics": {
+          "total_gt": 374,
+          "total_predictions": 407,
+          "total_tp": 301,
+          "total_fp": 106,
+          "mAP50": 0.6787,
+          "Precision_micro": 0.7396,
+          "Recall_micro": 0.8048,
+          "F1-score": 0.7708,
+          "RMSE": 0.117129,
+          "Bias": 0.057456,
+          "MAE": 0.092653,
+          "Std_error": 0.102068,
+          "Mean_IoU": 0.7588,
+          "Std_IoU": 0.1132,
+          "Positive_bias_percent": 69.44,
+          "Negative_bias_percent": 30.56
+        },
+        "per_class": {
+          "adj": {
+            "GT": 136,
+            "Predictions": 150,
+            "TP": 124,
+            "FP": 26,
+            "Precision": 0.8267,
+            "Recall": 0.9118,
+            "F1-score": 0.8671,
+            "AP50": 0.825
+          },
+          "geo": {
+            "GT": 93,
+            "Predictions": 93,
+            "TP": 77,
+            "FP": 16,
+            "Precision": 0.828,
+            "Recall": 0.828,
+            "F1-score": 0.828,
+            "AP50": 0.7837
+          },
+          "good": {
+            "GT": 15,
+            "Predictions": 20,
+            "TP": 10,
+            "FP": 10,
+            "Precision": 0.5,
+            "Recall": 0.6667,
+            "F1-score": 0.5714,
+            "AP50": 0.4445
+          },
+          "int": {
+            "GT": 89,
+            "Predictions": 105,
+            "TP": 56,
+            "FP": 49,
+            "Precision": 0.5333,
+            "Recall": 0.6292,
+            "F1-score": 0.5773,
+            "AP50": 0.5766
+          },
+          "non": {
+            "GT": 18,
+            "Predictions": 17,
+            "TP": 13,
+            "FP": 4,
+            "Precision": 0.7647,
+            "Recall": 0.7222,
+            "F1-score": 0.7429,
+            "AP50": 0.6269
+          },
+          "pro": {
+            "GT": 23,
+            "Predictions": 22,
+            "TP": 21,
+            "FP": 1,
+            "Precision": 0.9545,
+            "Recall": 0.913,
+            "F1-score": 0.9333,
+            "AP50": 0.8156
+          }
+        }
+      }
+    },
+    {
+      "experiment_info": {
+        "model_name": "SingleWeldDetector",
+        "date": "2026-05-19 12:05:33",
+        "data_yaml": "/content/mergfolds_1/data.yaml",
+        "total_images": 134
+      },
+      "test": {
+        "overall_metrics": {
+          "total_gt": 385,
+          "total_predictions": 396,
+          "total_tp": 312,
+          "total_fp": 84,
+          "mAP50": 0.7613,
+          "Precision_micro": 0.7879,
+          "Recall_micro": 0.8104,
+          "F1-score": 0.799,
+          "RMSE": 0.120141,
+          "Bias": 0.065732,
+          "MAE": 0.093793,
+          "Std_error": 0.100565,
+          "Mean_IoU": 0.7563,
+          "Std_IoU": 0.111,
+          "Positive_bias_percent": 76.6,
+          "Negative_bias_percent": 23.4
+        },
+        "per_class": {
+          "adj": {
+            "GT": 124,
+            "Predictions": 125,
+            "TP": 112,
+            "FP": 13,
+            "Precision": 0.896,
+            "Recall": 0.9032,
+            "F1-score": 0.8996,
+            "AP50": 0.853
+          },
+          "geo": {
+            "GT": 87,
+            "Predictions": 85,
+            "TP": 75,
+            "FP": 10,
+            "Precision": 0.8824,
+            "Recall": 0.8621,
+            "F1-score": 0.8721,
+            "AP50": 0.8298
+          },
+          "good": {
+            "GT": 18,
+            "Predictions": 18,
+            "TP": 14,
+            "FP": 4,
+            "Precision": 0.7778,
+            "Recall": 0.7778,
+            "F1-score": 0.7778,
+            "AP50": 0.6525
+          },
+          "int": {
+            "GT": 108,
+            "Predictions": 118,
+            "TP": 66,
+            "FP": 52,
+            "Precision": 0.5593,
+            "Recall": 0.6111,
+            "F1-score": 0.5841,
+            "AP50": 0.5462
+          },
+          "non": {
+            "GT": 24,
+            "Predictions": 25,
+            "TP": 24,
+            "FP": 1,
+            "Precision": 0.96,
+            "Recall": 1.0,
+            "F1-score": 0.9796,
+            "AP50": 0.9348
+          },
+          "pro": {
+            "GT": 24,
+            "Predictions": 25,
+            "TP": 21,
+            "FP": 4,
+            "Precision": 0.84,
+            "Recall": 0.875,
+            "F1-score": 0.8571,
+            "AP50": 0.7514
+          }
+        }
+      }
+    },
+    {
+      "experiment_info": {
+        "model_name": "SingleWeldDetector",
+        "date": "2026-05-19 20:23:06",
+        "data_yaml": "/content/mergfolds_1/data.yaml",
+        "total_images": 134
+      },
+      "test": {
+        "overall_metrics": {
+          "total_gt": 364,
+          "total_predictions": 376,
+          "total_tp": 296,
+          "total_fp": 80,
+          "mAP50": 0.7297,
+          "Precision_micro": 0.7872,
+          "Recall_micro": 0.8132,
+          "F1-score": 0.8,
+          "RMSE": 0.12406,
+          "Bias": 0.064758,
+          "MAE": 0.096971,
+          "Std_error": 0.105818,
+          "Mean_IoU": 0.7681,
+          "Std_IoU": 0.1054,
+          "Positive_bias_percent": 75.34,
+          "Negative_bias_percent": 24.66
+        },
+        "per_class": {
+          "adj": {
+            "GT": 115,
+            "Predictions": 108,
+            "TP": 93,
+            "FP": 15,
+            "Precision": 0.8611,
+            "Recall": 0.8087,
+            "F1-score": 0.8341,
+            "AP50": 0.7519
+          },
+          "geo": {
+            "GT": 104,
+            "Predictions": 114,
+            "TP": 94,
+            "FP": 20,
+            "Precision": 0.8246,
+            "Recall": 0.9038,
+            "F1-score": 0.8624,
+            "AP50": 0.8735
+          },
+          "good": {
+            "GT": 16,
+            "Predictions": 11,
+            "TP": 9,
+            "FP": 2,
+            "Precision": 0.8182,
+            "Recall": 0.5625,
+            "F1-score": 0.6667,
+            "AP50": 0.4868
+          },
+          "int": {
+            "GT": 76,
+            "Predictions": 87,
+            "TP": 51,
+            "FP": 36,
+            "Precision": 0.5862,
+            "Recall": 0.6711,
+            "F1-score": 0.6258,
+            "AP50": 0.5725
+          },
+          "non": {
+            "GT": 25,
+            "Predictions": 26,
+            "TP": 24,
+            "FP": 2,
+            "Precision": 0.9231,
+            "Recall": 0.96,
+            "F1-score": 0.9412,
+            "AP50": 0.9019
+          },
+          "pro": {
+            "GT": 28,
+            "Predictions": 30,
+            "TP": 25,
+            "FP": 5,
+            "Precision": 0.8333,
+            "Recall": 0.8929,
+            "F1-score": 0.8621,
+            "AP50": 0.7917
+          }
+        }
+      }
+    }
+  ]
+}

@@ -196,7 +196,6 @@ td {
 .severity-средняя { color: #f57c00; font-weight: 700; }
 .severity-низкая { color: #2e7d32; font-weight: 700; }
 
-/* Центрирование заголовков */
 .upload-page,
 .camera-page,
 .results-page,
@@ -275,7 +274,6 @@ td {
   display: block;
 }
 
-/* Центрирование контролов камеры */
 .controls {
   text-align: center;
 }
@@ -334,7 +332,6 @@ td {
   text-align: left;
 }
 
-/* Кнопки 300px и центрирование */
 .results-page button,
 .report-page button {
   width: 300px;
@@ -343,7 +340,6 @@ td {
   margin-right: auto;
 }
 
-/* Центрирование всех блоков с max-width */
 .upload-area,
 .preview,
 .camera-container,

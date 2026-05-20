@@ -41,8 +41,7 @@ const LiveCamera = ({ setResults }) => {
       streamRef.current.getTracks().forEach(track => track.stop())
       streamRef.current = null
     }
-    
-    // Удаляем видео элемент
+ 
     if (videoElementRef.current && videoContainerRef.current) {
       videoElementRef.current.remove()
       videoElementRef.current = null
@@ -67,8 +66,7 @@ const LiveCamera = ({ setResults }) => {
       })
       
       streamRef.current = stream
-      
-      // Создаем видео элемент динамически
+
       if (videoContainerRef.current) {
         const video = document.createElement('video')
         video.autoplay = true

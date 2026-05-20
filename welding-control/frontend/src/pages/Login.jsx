@@ -34,7 +34,6 @@ const Login = ({ setCurrentUser }) => {
       
       if (data.success && data.user) {
         setCurrentUser(data.user)
-        // После входа пользователь попадет на главную через App.jsx
       }
     } catch (err) {
       setError(err.message)

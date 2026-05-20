@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const BACKEND_URL = '/api';
 
-// Анализ изображения через бэкенд
 export const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
@@ -18,7 +17,6 @@ export const uploadImage = async (file) => {
   }
 };
 
-// Анализ кадра видео через бэкенд
 export const analyzeVideoFrame = async (frameData) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/analyze/frame`, { frame: frameData });
@@ -29,7 +27,6 @@ export const analyzeVideoFrame = async (frameData) => {
   }
 };
 
-// Генерация отчёта через бэкенд
 export const generateReport = async (results, format = 'pdf', metadata = {}) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/report/generate`, {
@@ -44,7 +41,6 @@ export const generateReport = async (results, format = 'pdf', metadata = {}) => 
   }
 };
 
-// Проверка статуса ML-сервиса
 export const checkMLStatus = async () => {
   try {
     const response = await axios.get(`${BACKEND_URL}/analysis/status`);
@@ -55,7 +51,6 @@ export const checkMLStatus = async () => {
   }
 };
 
-// Получение списка отчётов
 export const getReportsList = async () => {
   try {
     const response = await axios.get(`${BACKEND_URL}/report/list`);

@@ -93,8 +93,7 @@ class MLService:
     async def analyze_video(self, video_path: str):
         try:
             print(f"Анализ видео: {video_path}")
-            
-            # Конвертируем если не mp4
+
             if not video_path.endswith('.mp4'):
                 video_path = self.convert_video_to_mp4(video_path)
             

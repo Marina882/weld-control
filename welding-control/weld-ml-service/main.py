@@ -58,18 +58,15 @@ async def analyze_video(video: UploadFile = File(...)):
         raise HTTPException(status_code=503, detail="Модель не загружена")
     
     try:
-        # Сохраняем видео во временный файл
         with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
             content = await video.read()
             tmp_file.write(content)
             video_path = tmp_file.name
         
         print(f"Видео получено: {video_path}, размер: {len(content)} байт")
-        
-        # Обрабатываем видео
+
         result = process_video(model, video_path)
-        
-        # Удаляем временный файл
+
         os.unlink(video_path)
         
         return JSONResponse(content={"success": True, "filename": video.filename, "result": result})

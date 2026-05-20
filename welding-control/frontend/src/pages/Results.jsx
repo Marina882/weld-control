@@ -41,7 +41,6 @@ const Results = ({ results, setResults, currentUser }) => {
   return <ImageResults results={results} navigate={navigate} setResults={setResults} currentUser={currentUser} />
 }
 
-// Компонент для изображения
 const ImageResults = ({ results, navigate, setResults, currentUser }) => {
   const [zoomedImage, setZoomedImage] = useState(null)
   const [showDetails, setShowDetails] = useState(true)
@@ -364,8 +363,6 @@ const ImageResults = ({ results, navigate, setResults, currentUser }) => {
   )
 }
 
-
-// Компонент для видео
 const VideoResults = ({ results, navigate, setResults, currentUser }) => {
   const [showDetails, setShowDetails] = useState(true)
   const [zoomedImage, setZoomedImage] = useState(null)

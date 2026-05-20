@@ -43,10 +43,7 @@ def save_base64_image(base64_string, weld_id, frame_index=None):
 
 @router.post("/analyze/image")
 async def analyze_image(file: UploadFile = File(...)):
-    """
-    Анализ загруженного изображения через ML-сервис
-    БЕЗ сохранения в БД
-    """
+    """Анализ загруженного изображения через ML-сервис"""
     try:
         result = await ml_service.analyze_image(file)
         return JSONResponse(content=result)
@@ -58,10 +55,7 @@ async def analyze_image(file: UploadFile = File(...)):
 
 @router.post("/analyze/video")
 async def analyze_video(video: UploadFile = File(...)):
-    """
-    Анализ видео через ML-сервис
-    БЕЗ сохранения в БД
-    """
+    """Анализ видео через ML-сервис"""
     try:
         temp_dir = "temp_videos"
         os.makedirs(temp_dir, exist_ok=True)
@@ -104,7 +98,6 @@ async def save_edited_results(data: dict, db: Session = Depends(get_db)):
         db.add(db_result)
         db.flush()
 
-        # Сохраняем чистое изображение (если есть original_frame)
         if data.get('original_frame'):
             original_path = save_base64_image(
                 data['original_frame'],
@@ -112,8 +105,7 @@ async def save_edited_results(data: dict, db: Session = Depends(get_db)):
             )
             if original_path:
                 db_result.original_image_path = original_path
-        
-        # Сохраняем размеченное изображение
+
         if data.get('annotated_image'):
             image_path = save_base64_image(
                 data['annotated_image'],
@@ -122,7 +114,6 @@ async def save_edited_results(data: dict, db: Session = Depends(get_db)):
             if image_path:
                 db_result.image_path = image_path
         
-        # Сохраняем дефекты
         for defect in data.get('defects', []):
             db_defect = DefectDetail(
                 result_id=db_result.id,
@@ -162,20 +153,18 @@ async def save_edited_video_results(data: dict, db: Session = Depends(get_db)):
         )
         db.add(db_result)
         db.flush()
-        
-        # Сохраняем кадры
+
         for frame_idx, frame in enumerate(frames):
             if frame.get('annotated_image'):
                 image_path = save_base64_image(frame['annotated_image'], db_result.weld_id, frame_idx + 1)
                 if image_path and frame_idx == 0:
                     db_result.image_path = image_path
-            # Сохраняем чистый первый кадр
+
             if frame.get('original_frame') and frame_idx == 0:
                 original_path = save_base64_image(frame['original_frame'], db_result.weld_id + '_original')
                 if original_path:
                     db_result.original_image_path = original_path
 
-        # Сохраняем только подтверждённые дефекты
         for defect in unique_defects:
             db_defect = DefectDetail(
                 result_id=db_result.id,
@@ -200,9 +189,7 @@ async def save_edited_video_results(data: dict, db: Session = Depends(get_db)):
     
 @router.get("/history")
 async def get_analysis_history(limit: int = 50, db: Session = Depends(get_db)):
-    """
-    Получение истории анализов
-    """
+    """Получение истории анализов"""
     try:
         results = db.query(AnalysisResult).order_by(
             AnalysisResult.analysis_date.desc()
@@ -227,9 +214,7 @@ async def get_analysis_history(limit: int = 50, db: Session = Depends(get_db)):
 
 @router.get("/history/{weld_id}")
 async def get_analysis_detail(weld_id: str, db: Session = Depends(get_db)):
-    """
-    Получение детальной информации об анализе
-    """
+    """Получение детальной информации об анализе"""
     try:
         result = db.query(AnalysisResult).filter(
             AnalysisResult.weld_id == weld_id
@@ -268,9 +253,7 @@ async def get_analysis_detail(weld_id: str, db: Session = Depends(get_db)):
 
 @router.get("/analysis/image/{weld_id}")
 async def get_analysis_image(weld_id: str, db: Session = Depends(get_db)):
-    """
-    Получение сохраненного изображения анализа
-    """
+    """Получение сохраненного изображения анализа"""
     try:
         result = db.query(AnalysisResult).filter(
             AnalysisResult.weld_id == weld_id

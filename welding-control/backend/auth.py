@@ -7,7 +7,6 @@ from passlib.context import CryptContext
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-# Настройка хеширования паролей
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password, hashed_password):
@@ -16,9 +15,7 @@ def verify_password(plain_password, hashed_password):
 
 @router.post("/login")
 async def login(data: dict, db: Session = Depends(get_db)):
-    """
-    Проверка логина и пароля
-    """
+    """Проверка логина и пароля"""
     login = data.get('login')
     password = data.get('password')
     

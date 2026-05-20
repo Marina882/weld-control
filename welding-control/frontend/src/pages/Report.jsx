@@ -9,14 +9,12 @@ const Report = ({ results }) => {
   const [weldId, setWeldId] = useState('')
   const [historyList, setHistoryList] = useState([])
 
-  // Загрузка истории из БД
   const loadHistory = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/history?limit=100')
       const data = await response.json()
       if (data.history && data.history.length > 0) {
         setHistoryList(data.history)
-        // Если нет выбранного ID, выбираем последний
         if (!weldId) {
           setWeldId(data.history[0].weld_id)
         }

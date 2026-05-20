@@ -21,7 +21,6 @@ router = APIRouter()
 
 IMAGES_DIR = "analysis_images"
 
-# Регистрируем шрифты с поддержкой кириллицы
 FONT_NAME = 'Arial'
 FONT_BOLD = 'Arial-Bold'
 
@@ -39,9 +38,7 @@ except Exception as e:
 
 @router.post("/report/generate")
 async def generate_report(report_data: dict):
-    """
-    Генерация отчёта по одному шву (PDF) - из текущих результатов
-    """
+    """Генерация отчёта по одному шву """
     try:
         results = report_data.get('results', {})
         metadata = report_data.get('metadata', {})
@@ -95,7 +92,6 @@ async def get_weld_report(weld_id: str, db: Session = Depends(get_db)):
             'edited': result.edited 
         }
         
-        # Для видео — кадры
         if result.analysis_type == 'video':
             frames = []
             frame_pattern = os.path.join(IMAGES_DIR, f"{weld_id}_frame_*.jpg")
@@ -124,9 +120,7 @@ async def get_weld_report(weld_id: str, db: Session = Depends(get_db)):
 
 @router.get("/report/daily")
 async def get_daily_report(date: str, db: Session = Depends(get_db)):
-    """
-    Получение дневного отчёта
-    """
+    """Получение отчёта за день"""
     try:
         report_date = datetime.strptime(date, "%Y-%m-%d").date()
         
@@ -136,8 +130,7 @@ async def get_daily_report(date: str, db: Session = Depends(get_db)):
         
         good_count = sum(1 for r in results if 'годен' in r.quality.lower())
         defective_count = len(results) - good_count
-        
-        # Собираем операторов
+
         operators = {}
         for r in results:
             op_name = r.operator_name or "Неизвестный"
@@ -149,7 +142,6 @@ async def get_daily_report(date: str, db: Session = Depends(get_db)):
             else:
                 operators[op_name]['defective'] += 1
         
-        # Общая статистика дефектов
         defect_summary = {}
         seen_defects = set()
         
@@ -194,9 +186,7 @@ async def get_daily_report(date: str, db: Session = Depends(get_db)):
 
 @router.get("/report/daily/download")
 async def download_daily_report(date: str, format: str = "pdf", db: Session = Depends(get_db)):
-    """
-    Скачивание дневного отчёта (PDF)
-    """
+    """Скачивание дневного отчёта (PDF)"""
     try:
         report_date = datetime.strptime(date, "%Y-%m-%d").date()
         
@@ -209,19 +199,16 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
         
         c = canvas.Canvas(filepath, pagesize=A4)
         width, height = A4
-        
-        # Заголовок
+
         c.setFont(FONT_BOLD, 18)
         c.drawString(50, height - 50, f"Отчет за {date}")
-        
-        # Линия
+
         c.setStrokeColor("#334340")
         c.setLineWidth(1)
         c.line(50, height - 60, width - 50, height - 60)
         
         y = height - 85
-        
-        # Собираем операторов
+
         operators = {}
         for r in results:
             op_name = r.operator_name or "Неизвестный"
@@ -236,7 +223,6 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
         good_count = sum(1 for r in results if 'годен' in r.quality.lower())
         defective_count = len(results) - good_count
         
-        # Общая информация
         c.setFont(FONT_BOLD, 14)
         c.drawString(50, y, f"Всего швов: {len(results)}")
         y -= 25
@@ -251,8 +237,7 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
         y -= 25
         
         c.setFillColor("#000000")
-        
-        # Информация по операторам
+
         if operators:
             c.setFont(FONT_BOLD, 14)
             c.drawString(50, y, "Операторы:")
@@ -264,8 +249,7 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
                 y -= 18
             
             y -= 10
-        
-        # Общая статистика дефектов
+
         defect_summary = {}
         for r in results:
             seen_defects = set()
@@ -289,13 +273,11 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
                 y -= 18
             
             y -= 10
-        
-        # Линия-разделитель
+
         c.setStrokeColor("#334340")
         c.line(50, y, width - 50, y)
         y -= 20
-        
-        # Информация по швам (сгруппированы по операторам)
+
         c.setFont(FONT_BOLD, 14)
         c.drawString(50, y, "Сварные швы:")
         y -= 25
@@ -303,7 +285,6 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
         current_operator = None
         
         for r in results:
-            # Если оператор сменился - пишем заголовок
             op_name = r.operator_name or "Неизвестный"
             if op_name != current_operator:
                 current_operator = op_name
@@ -317,8 +298,7 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
                 c.drawString(50, y, f"Оператор: {op_name}")
                 c.setFillColor("#000000")
                 y -= 25
-            
-            # Собираем уникальные дефекты
+
             seen_defects = set()
             defect_details = {}
             for d in r.defects:
@@ -337,7 +317,6 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
                 c.showPage()
                 y = height - 50
             
-            # Фон
             c.setFillColor("#F9F4ED")
             c.rect(50, y - bg_height, width - 100, bg_height, fill=1, stroke=0)
             c.setFillColor("#000000")
@@ -391,33 +370,29 @@ async def generate_pdf_report(results, metadata, timestamp, reports_dir, is_vide
     
     c = canvas.Canvas(filepath, pagesize=A4)
     width, height = A4
-    
-    # Заголовок с ID шва
+
     weld_id = metadata.get('weldId', '')
     title = f"Отчет контроля качества сварного шва {weld_id}" if weld_id else "Отчет контроля качества сварного шва"
     
     c.setFont(FONT_BOLD, 16)
     c.drawString(50, height - 50, title)
-    
-    # Линия
+
     c.setStrokeColor("#334340")
     c.setLineWidth(1)
     c.line(50, height - 60, width - 50, height - 60)
     
     y = height - 85
-    
-    # Дата и тип анализа
+
     c.setFont(FONT_NAME, 11)
     c.drawString(50, y, f"Дата: {datetime.now().strftime('%d.%m.%Y %H:%M')}")
     y -= 18
     c.drawString(50, y, f"Тип анализа: {'Видео' if is_video else 'Изображение'}")
     y -= 18
-    
-    # Оператор и комментарии
+
     if metadata:
         c.drawString(50, y, f"Оператор: {metadata.get('operatorName', 'Не указан')}")
         y -= 18
-        # Пометка об редактировании
+
         if metadata.get('edited'):
             c.setFont(FONT_NAME, 10)
             c.setFillColor("#839958")
@@ -447,8 +422,7 @@ async def generate_pdf_report(results, metadata, timestamp, reports_dir, is_vide
 
 async def draw_image_pdf(c, results, y, width, height):
     """Отрисовка результатов изображения"""
-    
-    # Изображение
+
     annotated_image = results.get('annotated_image', '')
     if annotated_image:
         try:
@@ -466,8 +440,7 @@ async def draw_image_pdf(c, results, y, width, height):
             y -= (img_height + 30)
         except Exception as e:
             print(f"Ошибка вставки изображения: {e}")
-    
-    # Результаты
+
     c.setFont(FONT_BOLD, 14)
     c.drawString(50, y, "Результаты анализа:")
     y -= 25
@@ -477,8 +450,7 @@ async def draw_image_pdf(c, results, y, width, height):
     y -= 20
     c.drawString(50, y, f"Качество шва: {results.get('quality', 'Не определено')}")
     y -= 25
-    
-    # Обнаруженные дефекты (статистика)
+
     class_stats = results.get('class_stats', {})
     if class_stats:
         c.setFont(FONT_BOLD, 12)
@@ -495,8 +467,7 @@ async def draw_image_pdf(c, results, y, width, height):
             y -= 18
     
     y -= 15
-    
-    # Детальная информация по каждому дефекту
+
     defects = results.get('defects', [])
     if defects:
         c.setFont(FONT_BOLD, 12)
@@ -520,12 +491,10 @@ async def draw_video_pdf(c, results, y, width, height):
     """Отрисовка результатов видео"""
     
     frames = results.get('frames', [])
-    
-    # Статистика из ПОДТВЕРЖДЁННЫХ дефектов (class_stats уже готов)
+
     class_stats = results.get('class_stats', {})
     video_quality = results.get('quality', 'Не определено')
-    
-    # Все дефекты для детальной информации
+
     all_defects = results.get('defects', [])
     
     c.setFont(FONT_BOLD, 14)
@@ -537,8 +506,7 @@ async def draw_video_pdf(c, results, y, width, height):
     y -= 20
     c.drawString(50, y, f"Качество шва: {video_quality}")
     y -= 25
-    
-    # Обнаруженные дефекты (статистика)
+
     if class_stats:
         c.setFont(FONT_BOLD, 12)
         c.drawString(50, y, "Обнаруженные дефекты:")
@@ -555,8 +523,7 @@ async def draw_video_pdf(c, results, y, width, height):
             y -= 18
     
     y -= 10
-    
-    # Детальная информация (все дефекты)
+
     if all_defects:
         c.setFont(FONT_BOLD, 12)
         c.drawString(50, y, "Детальная информация:")
@@ -574,8 +541,7 @@ async def draw_video_pdf(c, results, y, width, height):
             y -= 16
     
     y -= 20
-    
-    # Кадры
+
     for i, frame in enumerate(frames[:4]):
         if y < 250:
             c.showPage()

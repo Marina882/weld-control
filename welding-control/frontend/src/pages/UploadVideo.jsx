@@ -87,7 +87,7 @@ const UploadVideo = ({ setResults }) => {
 
   return (
     <div className="upload-page">
-      <h2>Загрузка видео сварного шва</h2>
+      <h2>Загрузка видео сварочного шва</h2>
       
       {error && <div className="error-message">{error}</div>}
       

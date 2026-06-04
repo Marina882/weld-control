@@ -87,7 +87,7 @@ const Upload = ({ setResults }) => {
 
   return (
     <div className="upload-page">
-      <h2>Загрузка изображения сварного шва</h2>
+      <h2>Загрузка изображения сварочного шва</h2>
       
       {error && <div className="error-message">{error}</div>}
       

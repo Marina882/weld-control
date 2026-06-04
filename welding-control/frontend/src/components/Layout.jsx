@@ -13,7 +13,7 @@ const Layout = ({ children, currentUser, setCurrentUser }) => {
   return (
     <div className="layout">
       <nav className="navbar">
-        <div className="nav-brand">Контроль сварных швов</div>
+        <div className="nav-brand">Контроль сварочных швов</div>
         <div className="nav-menu">
           <button
             className={`nav-button ${location.pathname === '/' ? 'active' : ''}`}

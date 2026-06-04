@@ -372,7 +372,7 @@ async def generate_pdf_report(results, metadata, timestamp, reports_dir, is_vide
     width, height = A4
 
     weld_id = metadata.get('weldId', '')
-    title = f"Отчет контроля качества сварного шва {weld_id}" if weld_id else "Отчет контроля качества сварного шва"
+    title = f"Отчет контроля качества сварочного шва {weld_id}" if weld_id else "Отчет контроля качества сварочного шва"
     
     c.setFont(FONT_BOLD, 16)
     c.drawString(50, height - 50, title)

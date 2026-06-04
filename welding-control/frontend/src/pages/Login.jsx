@@ -63,7 +63,7 @@ const Login = ({ setCurrentUser }) => {
           marginBottom: '10px',
           fontSize: '1.8rem'
         }}>
-          Контроль сварных швов
+          Контроль сварочных швов
         </h1>
         <p style={{ 
           color: '#334340', 

@@ -214,7 +214,7 @@ const ImageResults = ({ results, navigate, setResults, currentUser }) => {
 
   return (
     <div className="results-page">
-      <h2>Результаты анализа сварного шва</h2>
+      <h2>Результаты анализа сварочного шва</h2>
       
       {editMode && (
         <div style={{ padding: '8px 15px', borderRadius: '7px', marginBottom: '15px', textAlign: 'center', color: '#2e7d32', border: '2px solid #2e7d32', fontSize: '0.95rem' }}>
@@ -269,7 +269,7 @@ const ImageResults = ({ results, navigate, setResults, currentUser }) => {
         {editMode && (
           <div style={{ textAlign: 'center', marginTop: '20px' }}>
             {!showAddDefect ? (
-              <button onClick={() => setShowAddDefect(true)} style={{ background: '#839958', width: '300px' }}>+ Добавить дефект</button>
+              <button onClick={() => setShowAddDefect(true)} style={{ background: '#839958', width: '300px' }}>Добавить дефект</button>
             ) : (
               <div style={{ background: 'white', padding: '15px', borderRadius: '7px', maxWidth: '400px', margin: '0 auto' }}>
                 <p style={{ marginBottom: '10px' }}>Выберите вид дефекта:</p>
@@ -625,7 +625,7 @@ const VideoResults = ({ results, navigate, setResults, currentUser }) => {
       {editMode && (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           {!showAddDefect ? (
-            <button onClick={() => setShowAddDefect(true)} style={{ background: '#839958', width: '300px' }}>+ Добавить дефект</button>
+            <button onClick={() => setShowAddDefect(true)} style={{ background: '#839958', width: '300px' }}>Добавить дефект</button>
           ) : (
             <div style={{ background: 'white', padding: '15px', borderRadius: '7px', maxWidth: '400px', margin: '0 auto' }}>
               <p style={{ marginBottom: '10px' }}>Выберите вид дефекта:</p>

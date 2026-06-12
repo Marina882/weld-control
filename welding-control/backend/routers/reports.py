@@ -279,7 +279,7 @@ async def download_daily_report(date: str, format: str = "pdf", db: Session = De
         y -= 20
 
         c.setFont(FONT_BOLD, 14)
-        c.drawString(50, y, "Сварные швы:")
+        c.drawString(50, y, "Сварочные швы:")
         y -= 25
         
         current_operator = None

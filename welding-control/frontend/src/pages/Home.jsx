@@ -6,7 +6,7 @@ const Home = ({ setResults }) => {
 
   return (
     <div className="home-page">
-      <h1>Система контроля качества сварных швов</h1>
+      <h1>Система контроля качества сварочных швов</h1>
       <p>Автоматическое обнаружение дефектов с использованием ML</p>
       
       <div className="features-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
